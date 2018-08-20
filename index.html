@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)http://intranet.iskra.eu/itpodpora/scp/login.php -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="refresh" content="7200">
+    <title>osTicket :: Prijava agenta</title>
+    <link rel="stylesheet" href="assets/css/login.css" type="text/css">
+    <meta name="robots" content="noindex">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body id="loginBody">
+
+<div id="brickwall"></div>
+<div id="loginBox">
+
+    <div id="blur">
+        <div id="background"></div>
+    </div>
+
+    <h1 id="logo"><a href="http://intranet.iskra.eu/itpodpora/scp/index.php">
+
+        <span class="valign-helper"></span>
+        <img src="assets/img/logo.jpg" alt="osTicket :: Nadzorna plošča osebja">
+    </a></h1>
+    <h3>Zahtevano je preverjanje pristnosti</h3>
+
+    <div class="banner"><small></small></div>
+
+    <form action="login.php" method="post" id="login">
+
+        <input type="hidden" name="__CSRFToken__" value="f5748df44c939e5828715f54e2f8b7b12d98bbe5">
+        <input type="hidden" name="do" value="scplogin">
+
+        <fieldset>
+
+        <input type="text" name="user" id="name" value="" placeholder="Uporabniško ime ali email naslov" autofocus="" autocorrect="off" autocapitalize="off">
+        <input type="password" name="pass" id="pass" placeholder="Geslo" autocorrect="off" autocapitalize="off">
+
+            <button class="submit button pull-right" type="submit" name="submit"><i class="icon-signin"></i>
+                Prijava            </button>
+        </fieldset>
+
+    </form>
+
+    <div id="company">
+        <div class="content">
+            Avorske pravice © Iskra - Helpdesk        </div>
+    </div>
+</div>
+<div id="poweredBy">Poganja    <a href="http://www.osticket.com/" target="_blank">
+        <img alt="osTicket" src="assets/img/osticket-grey.png" class="osticket-logo">
+    </a>
+</div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (undefined === window.getComputedStyle(document.documentElement).backgroundBlendMode) {
+            document.getElementById('loginBox').style.backgroundColor = 'white';
+        }
+    });
+    </script>
+    <!--[if IE]>
+    <style>
+        #loginBox:after { background-color: white !important; }
+    </style>
+    <![endif]-->
+
+
+</body></html>
