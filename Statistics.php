@@ -3,7 +3,7 @@
  session_start();
 
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 3600)) {
-    // request 30 minates ago
+    // request 10 hours ago
     session_destroy();
     session_unset();
 }
@@ -57,11 +57,59 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time
             <!--
                 The value of this fields are the ID for each departments
             -->
-            <p class="help-block">Filter po PE</p>
-            <select id="FilterDept">
+            <p class="help-block">Filter by department</p>
+            <select id="FilterDept" onchange="resetFilter('FilterDept')">
                     <option value="AutoDept">Avtomatsko</option>
-                    <option value="Departments;1">IT Podpora</option>
-                    <option value="Departments;2">CRM Podpora</option>
+                    <option value="1">IT Podpora</option>
+                    <option value="2">CRM Podpora</option>
+            </select><br><br>
+
+            <p class="help-block">Filter by location</p>
+            <select id="FilterLocation" onchange="resetFilter('FilterLocation')">
+                <option value="AutoLocation">Avtomatsko</option>
+                <option value="1">PE Semic</option>
+                <option value="2">PE Ljubljana</option>
+                <option value="3">PE Otoce</option>
+                <option value="4">PE Kranj</option>
+                <option value="5">PE Sentvid</option>
+                <option value="6">PE Glinek</option>
+            </select><br><br>
+
+            <p class="help-block">Filter by agent</p>
+            <select id="FilterAgents" onchange="resetFilter('FilterAgents')">
+                <option value="AutoAgents">Avtomatsko</option>
+                <option value="1">Sašo Dorniž</option>
+                <option value="3">Barbara SELAKOVIĆ</option>
+                <option value="4">Damir BAČIČ</option>
+                <option value="5">Luka DEU</option>
+                <option value="7">Franci Mubi</option>
+                <option value="8">Jakob SNOJ</option>
+                <option value="9">Igor KALIZAN</option>
+                <option value="10">Andraž ROT</option>
+                <option value="11">Ksenija ŠKRLJ</option>
+            </select><br><br>
+
+            <p class="help-block">Filter by topic</p>
+            <select id="FilterTopics" onchange="resetFilter('FilterTopics')">
+                <option value="AutoTopics">Avtomatsko</option>
+                <option value="17">THEREFORE</option>
+                <option value="18">INFOR LN</option>
+                <option value="19">E-POŠTA</option>
+                <option value="20">Splošna odprava napak - PC</option>
+                <option value="21">Telefonija</option>
+                <option value="22">Omrežje</option>
+                <option value="23">Tiskanje</option>
+                <option value="24">Intranet - Iskranet</option>
+                <option value="25">Internet - www</option>
+                <option value="27">Nabava računalniške opreme</option>
+                <option value="28">Nalepke</option>
+                <option value="29">Meritve</option>
+                <option value="30">Terminali</option>
+                <option value="31">Office</option>
+                <option value="32">Aplikacije</option>
+                <option value="34">Intrix CRM tehnične pos.</option>
+                <option value="35">Intrix CRM poslovne pos.</option>
+                <option value="36">Nameščanje sistema</option>
             </select><br><br>
 
             <button class="btn btn-primary" type="button" onclick="filterByDate()">Osveži</button>
@@ -200,6 +248,45 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time
             document.getElementById('inp_department_table').value = departmentTable.innerHTML;
             document.getElementById('inp_topic_table').value = topicTable.innerHTML;
             document.getElementById('inp_agent_table').value = agentTable.innerHTML;
+        }
+
+    </script>
+
+    <script>
+
+        function resetFilter(filter){
+
+            var department= document.getElementById("FilterDept");
+            var location= document.getElementById("FilterLocation");
+            var agents= document.getElementById("FilterAgents");
+            var topics= document.getElementById("FilterTopics");
+
+            if(filter=="FilterDept"){
+
+                location.selectedIndex=0;
+                agents.selectedIndex=0;
+                topics.selectedIndex=0;
+
+            }else if(filter=="FilterLocation"){
+
+                department.selectedIndex=0;
+                agents.selectedIndex=0;
+                topics.selectedIndex=0;
+
+            }else if(filter=="FilterAgents"){
+
+                location.selectedIndex=0;
+                department.selectedIndex=0;
+                topics.selectedIndex=0;
+
+            }else if(filter=="FilterTopics"){
+
+                location.selectedIndex=0;
+                agents.selectedIndex=0;
+                department.selectedIndex=0;
+
+            }
+
         }
 
     </script>

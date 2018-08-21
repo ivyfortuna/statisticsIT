@@ -48,9 +48,6 @@
 
     foreach ($result as $locations){
 
-
-        $sqlLocations ="SELECT ticket_id FROM ost_ticket__cdata WHERE location=$locations[localization]";
-
         //we have to check if the location is null to change the query
         if ($locations['localization'] == null){
 

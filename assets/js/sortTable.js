@@ -61,4 +61,15 @@ function sortTable(n, tableid) {
             }
         }
     }
+    for(i=1;i<rows.length;i++){
+
+        if(tablecolor==true){
+            rows[i].style.setProperty('background-color', 'white');
+            tablecolor=false;
+        }else{
+            rows[i].style.setProperty('background-color', '#DDDDDD');
+            tablecolor=true;
+        }
+
+    }
 }

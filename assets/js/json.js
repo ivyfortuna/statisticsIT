@@ -4,6 +4,9 @@ var To= "";
 var CheckTotal= "";
 var FilterDate = "";
 var FilterDept = "";
+var FilterLocation = "";
+var FilterAgents = "";
+var FilterTopics = "";
 var tablecolor = true;
 
 function filterByDate(){
@@ -13,13 +16,19 @@ function filterByDate(){
     To= document.getElementById("To").value;
     FilterDate = document.getElementById("FilterDate").value;
     FilterDept = document.getElementById("FilterDept").value;
+    FilterLocation = document.getElementById("FilterLocation").value;
+    FilterAgents = document.getElementById("FilterAgents").value;
+    FilterTopics = document.getElementById("FilterTopics").value;
 
     //Request a JSON for the dates
     JSONRequest.open("GET", "GetDate.php?From=" + From +
         "&To=" + To +
         "&Total=" + CheckTotal +
         "&FilterDate=" + FilterDate +
-        "&FilterDept=" + FilterDept + "", true);
+        "&FilterDept=" + FilterDept +
+        "&FilterLocation=" + FilterLocation +
+        "&FilterAgents=" + FilterAgents +
+        "&FilterTopics=" + FilterTopics +"", true);
 
     JSONRequest.send(null);
 
@@ -27,7 +36,10 @@ function filterByDate(){
         "&To=" + To +
         "&Total=" + CheckTotal +
         "&FilterDate=" + FilterDate +
-        "&FilterDept=" + FilterDept + "", true);
+        "&FilterDept=" + FilterDept +
+        "&FilterLocation=" + FilterLocation +
+        "&FilterAgents=" + FilterAgents +
+        "&FilterTopics=" + FilterTopics +"", true);
 
     JSONRequestTotal.send(null);
 

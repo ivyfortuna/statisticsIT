@@ -61,30 +61,6 @@ button#buttonIdea.btn.btn-primary.btn-block{
   margin-top:10px;
 }
 
-th#register{
-  cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-th#approved{
-  cursor: pointer;
-  background-color: rgba(255,0,0,0.5);
-}
-th#tested{
-  cursor: pointer;
-  background-color: rgba(255,255,0,0.5);
-}
-th#implemented{
-  cursor: pointer;
-  background-color: rgba(0,0,255,0.5);
-}
-th#discarded{
-  cursor: pointer;
-  background-color: rgba(255,0,255,0.5);
-}
-th#total{
-  cursor: pointer;
-  background-color: rgba(0,255,255,0.5);
-}
 td{
     font-weight: 500!important;
     font-size: 12px!important;
@@ -94,14 +70,11 @@ td{
 #IskraLogo {
     width: 25%;
 }
-#FilterDate{
-    width:100%;
-}
-#FilterDept{
+#FilterDate, #FilterDept, #FilterLocation, #FilterAgents, #FilterTopics{
     width:100%;
 }
 
-#departmentDiv{
+#departmentDiv, #topicDiv{
   width:40%;
   margin-top:10px;
   margin-left: 5%;
@@ -110,30 +83,10 @@ td{
   display: block;
 }
 
-#locationDiv{
+#locationDiv, #agentDiv{
   width:40%;
   float:left;
   margin-top:10px;
-  margin-left: 5%;
-  margin-right: 5%;
-  display: block;
-
-}
-
-#agentDiv{
-  width:40%;
-  float:left;
-  margin-top:20px;
-  margin-left: 5%;
-  margin-right: 5%;
-  display: block;
-
-}
-
-#topicDiv{
-  width:40%;
-  float: right;
-  margin-top:20px;
   margin-left: 5%;
   margin-right: 5%;
   display: block;

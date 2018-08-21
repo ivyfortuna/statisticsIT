@@ -49,6 +49,14 @@
                 display: true,
                 text: 'Statistika v obdoju'
             },
+
+            legend:{
+                display:true,
+                labels:{
+                    fontSize:14
+                }
+            },
+
             //Display tooltip true or false, check different modes on chart.js
             tooltips: {
                 mode: 'index',
@@ -68,7 +76,8 @@
                     display: true,
                     scaleLabel: {
                         display: true,
-                        labelString: 'Time'
+                        labelString: 'Time',
+                        fontSize: 14
                     }
                 }],
                 //Scale Y
@@ -76,7 +85,8 @@
                     display: true,
                     scaleLabel: {
                         display: true,
-                        labelString: 'Nº Tickets'
+                        labelString: 'Nº Tickets',
+                        fontSize: 14
                     },
                     ticks: {
                         beginAtZero: true,
@@ -133,6 +143,14 @@
                 display: true,
                 text: 'Skupna statistika'
             },
+
+            legend:{
+                display:true,
+                labels:{
+                    fontSize:14
+                }
+            },
+
             //Display tooltip true or false, check different modes on chart.js
             tooltips: {
                 mode: 'index',
@@ -152,7 +170,8 @@
                     display: true,
                     scaleLabel: {
                         display: true,
-                        labelString: 'Time'
+                        labelString: 'Time',
+                        fontSize: 14
                     }
                 }],
                 //Scale Y
@@ -160,7 +179,8 @@
                     display: true,
                     scaleLabel: {
                         display: true,
-                        labelString: 'Nº Tickets'
+                        labelString: 'Nº Tickets',
+                        fontSize: 14
                     },
                     ticks: {
                         beginAtZero: true,
@@ -197,7 +217,7 @@
         chart.data.labels.push(label);
         var i = 0;
 
-        if(FilterDept=="AutoDept") {
+        if(FilterDept=="AutoDept" && FilterLocation=="AutoLocation" && FilterAgents=="AutoAgents" && FilterTopics=="AutoTopics") {
 
             chart.options.title.text = "Statistika v obdobju";
 
@@ -244,7 +264,7 @@
         chart.data.labels.push(label);
         var i = 0;
 
-        if(FilterDept=="AutoDept") {
+        if(FilterDept=="AutoDept" && FilterLocation=="AutoLocation" && FilterAgents=="AutoAgents" && FilterTopics=="AutoTopics") {
 
             chart.options.title.text ="Skupna statistika";
 

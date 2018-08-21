@@ -41,6 +41,9 @@ $jsonDay = '';
 
 $FilterDate = $_GET['FilterDate'];
 $FilterDept = $_GET['FilterDept'];
+$FilterLocation = $_GET['FilterLocation'];
+$FilterAgents = $_GET['FilterAgents'];
+$FilterTopics = $_GET['FilterTopics'];
 
 //Check if get From is empty
 if(!$_GET['From']==null) {
@@ -328,19 +331,39 @@ while ($row = mysqli_fetch_row($result)) {
 
     }
 
-    if($FilterDept=="AutoDept") {
+    if($FilterDept=="AutoDept" && $FilterLocation=="AutoLocation" && $FilterAgents=="AutoAgents" && $FilterTopics=="AutoTopics") {
 
         //Queries for the tickets count
         $sql = "SELECT 
               (SELECT count(created) FROM ost_ticket WHERE (created BETWEEN '$From' AND '$To2') AND status_id IN (1,6)) as open, 
               (SELECT count(created) FROM ost_ticket WHERE (created BETWEEN '$From' AND '$To2') AND status_id IN (2,3,4,5)) as closed";
 
-    }else{
+    }elseif($FilterDept!="AutoDept"){
 
         $sql = "SELECT 
               (SELECT ost_department.name FROM ost_department WHERE ost_department.id='$FilterDept') as DeptName,
-              (SELECT count(created) FROM ost_ticket WHERE (created BETWEEN '$From' AND '$To2') AND dept_id=$FilterDept AND status_id IN (1,6)) as open, 
-              (SELECT count(created) FROM ost_ticket WHERE (created BETWEEN '$From' AND '$To2') AND dept_id=$FilterDept AND status_id IN (2,3,4,5)) as closed";
+              (SELECT count(created) FROM ost_ticket WHERE (created BETWEEN '$From' AND '$To2') AND dept_id='$FilterDept' AND status_id IN (1,6)) as open, 
+              (SELECT count(created) FROM ost_ticket WHERE (created BETWEEN '$From' AND '$To2') AND dept_id='$FilterDept' AND status_id IN (2,3,4,5)) as closed";
+
+    }elseif($FilterLocation!="AutoLocation"){
+
+        $sql = "SELECT 
+              (SELECT value from ost_list_items where id='$FilterLocation') as Location, 
+              (SELECT COUNT(created) FROM `ost_ticket` WHERE (created BETWEEN '$From' AND '$To2') AND status_id IN (1,6) AND ticket_id IN (SELECT ticket_id FROM ost_ticket__cdata WHERE location=$FilterLocation)) as open, 
+              (SELECT COUNT(created) FROM `ost_ticket` WHERE (created BETWEEN '$From' AND '$To2') AND status_id IN (2,3,4,5) AND ticket_id IN (SELECT ticket_id FROM ost_ticket__cdata WHERE location=$FilterLocation)) as closed";
+
+    }elseif($FilterAgents!="AutoAgents"){
+
+        $sql = "SELECT 
+              (SELECT concat(firstname, ' ', lastname) FROM `ost_staff` WHERE staff_id='$FilterAgents') as name,
+              (SELECT COUNT(*) FROM `ost_ticket` where staff_id='$FilterAgents' AND created BETWEEN '$From' AND '$To2' AND status_id in (1,6)) as open,
+              (SELECT COUNT(*) FROM `ost_ticket` where staff_id='$FilterAgents' AND created BETWEEN '$From' AND '$To2' AND status_id in (2,3,4,5))as closed";
+    }elseif($FilterTopics!="AutoTopics"){
+
+        $sql = "SELECT
+              (SELECT topic FROM `ost_help_topic` WHERE topic_id='$FilterTopics') as name,
+              (SELECT COUNT(*) FROM `ost_ticket` WHERE topic_id='$FilterTopics' AND created BETWEEN '$From' AND '$To2' AND status_id IN (1,6)) as open,
+              (SELECT COUNT(*) FROM `ost_ticket` WHERE topic_id='$FilterTopics' AND created BETWEEN '$From' AND '$To2' AND status_id IN (2,3,4,5)) as closed";
 
     }
     //Take the result of the query or send an error if something goes wrong
