@@ -17,6 +17,7 @@
 //               info@tecnick.com
 //============================================================+
 
+//receive the data from the form
 $img = $_POST['img'];
 $imgTotal = $_POST['imgTotal'];
 $locationTable = $_POST['locationPDF'];
@@ -33,6 +34,7 @@ $dataTotal = base64_decode($imgTotal);
 $file = 'assets/pdf/img'.date("YmdHis").'.png';
 $fileTotal = 'assets/pdf/imgTotal'.date("YmdHis").'.png';
 
+//check if the image of the charts can be created
 if (file_put_contents($file, $data)) {
 
 } else {
@@ -192,11 +194,13 @@ $ageTable =  <<<EOF
 
 EOF;
 
+//print the charts
 $pdf->Image('@' . $img, 10,30,190,100);
 $pdf->Image('@' . $imgTotal, 10,140,190,100);
 
 $pdf->setCellPaddings($left = '', $top = '5px', $right = '', $botton = '');
 
+//create new pages and print the tables
 $pdf->AddPage();
 $pdf->writeHTML($locTable, true, false, false, false, '');
 $pdf->writeHTML($depTable, true, false, false, false, '');

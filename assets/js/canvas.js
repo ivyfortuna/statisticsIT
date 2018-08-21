@@ -27,11 +27,13 @@
                         //edit this values to change what you want to show
                         data: [],
 
+                        //edit this value to change background color
                         backgroundColor:[
                             ''
                         ]
                     }, {
 
+                        //Label for the line, it's colors and values
 						label: "Close",
                         fill:false,
 						data: []
@@ -50,6 +52,7 @@
                 text: 'Statistika v obdoju'
             },
 
+            //Display the legend and edit its size
             legend:{
                 display:true,
                 labels:{
@@ -198,7 +201,7 @@
         }
     };
 
-    //When the page is loaded it execute this script to load the chart properly
+    //When the page is loaded it execute this script to load the chart
     window.onload = function () {
 
         ctx = document.getElementById('lineChart').getContext('2d');
@@ -209,7 +212,7 @@
 
     };
 
-    //This function insert data into the chart (create a new point for EVERY dataset in the chart
+    //This function insert data into the chart (create a new point for every dataset in the chart)
     function addData(chart, label, data) {
 
         document.getElementById("lineChart").hidden=false;
@@ -305,7 +308,7 @@
     }
 
     //This function delete ALL the points in the chart
-    function removeData(chart, futureDelete) {
+    function removeData(chart) {
 
         var i=0;
         var datasetLength = chart.config.data.datasets.length;
@@ -319,7 +322,6 @@
             }
         }
 
-
         for(i=0;i<totalDataset;i++){
 
             chart.data.labels.pop();
@@ -330,4 +332,5 @@
             });
             chart.update();
         }
+
     }

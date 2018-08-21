@@ -1,11 +1,13 @@
 <?php
 
- session_start();
+session_start();
 
+//after 1 hour of inactivity it will log out automatically
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 3600)) {
-    // request 10 hours ago
+
     session_destroy();
     session_unset();
+
 }
 $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time
 
@@ -37,9 +39,17 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time
     </div>
     <div id="Error"></div>
     <div class="container">
+
+
+        <!-- this is the Total chart, it's values are managed in the Canvas.js file -->
         <canvas id="lineChart"></canvas>
 
-        <form onsubmit="prepareImg()" action="CreatePDF.php" method="POST" target="_blank">
+            <!--
+
+                These are the filter for the charts and the tables
+
+            -->
+            <form onsubmit="prepareImg()" action="CreatePDF.php" method="POST" target="_blank">
 
             <p class="help-block">Od </p>
             <input class="form-control input-lg" type="date" id="From">
@@ -55,7 +65,9 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time
             </select><br><br>
 
             <!--
-                The value of this fields are the ID for each departments
+
+                The value of these tables are the ID needed for the queries
+
             -->
             <p class="help-block">Filter by department</p>
             <select id="FilterDept" onchange="resetFilter('FilterDept')">
@@ -113,6 +125,12 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time
             </select><br><br>
 
             <button class="btn btn-primary" type="button" onclick="filterByDate()">Osveži</button>
+
+            <!--
+
+                These hidden values are use to send information to the CreatePDF.php file
+
+            -->
             <input id="inp_img" name="img" type="hidden" value="">
             <input id="inp_img_total" name="imgTotal" type="hidden" value="">
             <input id="inp_location_table" name="locationPDF" type="hidden" value="">
@@ -123,9 +141,17 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time
 
         </form>
 
+        <!-- this is the Total chart, it's values are managed in the Canvas.js file -->
+
         <canvas id="lineChartTotal"></canvas>
     </div>
 
+
+    <!--
+
+        These are the tables, they have the titles already written here, each table has it's own php file to control it
+
+    -->
 <div id="tables">
     <div id="locationDiv" class="container">
         <div class="table-responsive">
@@ -213,7 +239,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time
     <script src="assets/js/sortTable.js"></script>
 
     <script>
-
+        //this script set the max attribute for the From and To dates on the Filter, the max is the actual day
         var today = new Date();
         var dd = today.getDate();
         var mm = today.getMonth()+1; //January is 0!
@@ -236,6 +262,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time
 
         function prepareImg() {
 
+            //these prepare the values of the hidden inputs to send them to CreatePDF.php file
             var canvas = document.getElementById('lineChart');
             var canvasTotal = document.getElementById('lineChartTotal');
             var locationTable = document.getElementById('locationDiv');
@@ -254,6 +281,8 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time
 
     <script>
 
+        //this reset the select option everytime we pick and option for then to not interfere with each other
+        //if we select a department: location, agent and topic wil be set to automatic
         function resetFilter(filter){
 
             var department= document.getElementById("FilterDept");

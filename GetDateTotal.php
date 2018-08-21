@@ -78,6 +78,8 @@ if($To==''){
 }
 
 $days = (abs(strtotime($From) - strtotime($To))) / (60 * 60 * 24);
+
+
 //this if elseif block is used to autofilter the chart
 
 if ($FilterDate == 'Years') {
@@ -108,20 +110,20 @@ if ($FilterDate == 'Years') {
 
 $result = mysqli_query($con, $sql) or die(mysqli_error($con));
 
-//This variable is going to be used in the $jsonData to iterateKoper, 6000
+//This variable is going to be used in the $jsonData to iterate
 $j = 1;
 //This variable is used to save the values for the chart
 $i = 0;
 
 while ($row = mysqli_fetch_row($result)) {
+
     //Split the date on Year-Month-Day to work with it in the autofilter
     $row[0] = explode('-', $row[0]);
     //Change the string to date to be able to add the date to the JSON properly
     //Auto filter
     //filter by year if there are more than 3 years
-    //filter by month if there are less than 3 years and more than 6 month
-    //filter by week if there are less than 6 month and more than 5 weeks
-    //filter by days if there are less than 5 weeks
+    //filter by month if there are less than 3 years and more than 3 months
+    //filter by days if there are less than 3 months
     if ($days >= 1095 && $FilterDate != "Months" && $FilterDate != "Days" || $FilterDate == "Years") {
 
         $newYear = $row[0][0] . "-12-31";
@@ -331,9 +333,14 @@ while ($row = mysqli_fetch_row($result)) {
 
     }
 
+    /*
+     *
+     *
+     * Queries for the tickets count, the query depend on the options on the Filter
+     *
+     */
     if($FilterDept=="AutoDept" && $FilterLocation=="AutoLocation" && $FilterAgents=="AutoAgents" && $FilterTopics=="AutoTopics") {
 
-        //Queries for the tickets count
         $sql = "SELECT 
               (SELECT count(created) FROM ost_ticket WHERE (created BETWEEN '$From' AND '$To2') AND status_id IN (1,6)) as open, 
               (SELECT count(created) FROM ost_ticket WHERE (created BETWEEN '$From' AND '$To2') AND status_id IN (2,3,4,5)) as closed";
@@ -383,6 +390,12 @@ while ($row = mysqli_fetch_row($result)) {
     }
 }
 
+
+/*
+ *
+ * The next 2 elseif blocks generate new days/months/years if there is no data about them
+ *
+ */
 
 $toYear = substr($To,0,-6);
 $toMonth[0] = substr($To,0,-6);

@@ -20,7 +20,7 @@ function filterByDate(){
     FilterAgents = document.getElementById("FilterAgents").value;
     FilterTopics = document.getElementById("FilterTopics").value;
 
-    //Request a JSON for the dates
+    //Request a JSON the values of the chart
     JSONRequest.open("GET", "GetDate.php?From=" + From +
         "&To=" + To +
         "&Total=" + CheckTotal +
@@ -32,6 +32,7 @@ function filterByDate(){
 
     JSONRequest.send(null);
 
+    //Request a JSON the values of the total chart
     JSONRequestTotal.open("GET", "GetDateTotal.php?From=" + From +
         "&To=" + To +
         "&Total=" + CheckTotal +
@@ -43,6 +44,7 @@ function filterByDate(){
 
     JSONRequestTotal.send(null);
 
+    //Request a JSON the values of the locations table
     JSONLocationsTable.open("GET", "GetLocationsTables.php?From=" + From +
         "&To=" + To +
         "&Total=" + CheckTotal +
@@ -50,6 +52,7 @@ function filterByDate(){
         "&FilterDept=" + FilterDept + "", true);
     JSONLocationsTable.send(null);
 
+    //Request a JSON the values of the departments table
     JSONDeptTable.open("GET", "GetDeptTables.php?From=" + From +
         "&To=" + To +
         "&Total=" + CheckTotal +
@@ -57,6 +60,7 @@ function filterByDate(){
         "&FilterDept=" + FilterDept + "", true);
     JSONDeptTable.send(null);
 
+    //Request a JSON the values of the agents table
     JSONAgentsTable.open("GET", "GetAgentsTables.php?From=" + From +
         "&To=" + To +
         "&Total=" + CheckTotal +
@@ -64,6 +68,7 @@ function filterByDate(){
         "&FilterDept=" + FilterDept + "", true);
     JSONAgentsTable.send(null);
 
+    //Request a JSON the values of the topics table
     JSONTopicsTable.open("GET", "GetTopicsTables.php?From=" + From +
         "&To=" + To +
         "&Total=" + CheckTotal +
@@ -106,9 +111,6 @@ function handleReplyTotal() {
             addDataTotal(myLineTotal, data2[0][i], data2[i + 1]);
 
         }
-
-
-        //INVESTIGATE HOW TO GET THE MONTHS FROM GETDATE.PHP TO CHANGE THE LABELS
     }
 }
 
@@ -116,16 +118,22 @@ function getLocationTable() {
 
     var locationtable = "";
 
+    //if the JSON has a response do the code
     if (JSONLocationsTable.readyState == 4) {
 
+        //insert the JSON data on the variable
         locationtable = JSON.parse(this.responseText);
 
+        //empty the table to avoid duplicates
         document.getElementById("location").innerHTML = "";
 
+        //based on the length of the variable with the JSON data iterate
         for(var i=1;i<locationtable.length+1;i++){
 
+            //this if only is used to change the color of every two lines
             if(tablecolor==true) {
 
+                //Insert the data of this iteration in the table
                 document.getElementById("location").innerHTML +="<tr>" +
                     "<td id='departments'>" + locationtable[0][i-1] + "</td>" +
                     "<td>" + locationtable[i][0] + "</td>" +
@@ -136,6 +144,7 @@ function getLocationTable() {
                 tablecolor=false;
             }else{
 
+                //Insert the data of this iteration in the table
                 document.getElementById("location").innerHTML +="<tr bgcolor='#DDDDDD'>" +
                     "<td id='departments'>" + locationtable[0][i-1] + "</td>" +
                     "<td>" + locationtable[i][0] + "</td>" +
@@ -153,16 +162,22 @@ function getDeptTable() {
 
     var deptable = "";
 
+    //if the JSON has a response do the code
     if (JSONDeptTable.readyState == 4) {
 
+        //insert the JSON data on the variable
         deptable = JSON.parse(this.responseText);
 
+        //empty the table to avoid duplicates
         document.getElementById("dept").innerHTML = "";
 
+        //based on the length of the variable with the JSON data iterate
         for(var i=1;i<deptable.length+1;i++){
 
+            //this if only is used to change the color of every two lines
             if(tablecolor==true) {
 
+                //Insert the data of this iteration in the table
                 document.getElementById("dept").innerHTML +="<tr>" +
                     "<td id='departments'>" + deptable[0][i-1] + "</td>" +
                     "<td>" + deptable[i][0] + "</td>" +
@@ -173,6 +188,7 @@ function getDeptTable() {
                 tablecolor=false;
             }else{
 
+                //Insert the data of this iteration in the table
                 document.getElementById("dept").innerHTML +="<tr bgcolor='#DDDDDD'>" +
                     "<td id='departments'>" + deptable[0][i-1] + "</td>" +
                     "<td>" + deptable[i][0] + "</td>" +
@@ -190,16 +206,22 @@ function getAgentTable() {
 
     var agenttable = "";
 
+    //if the JSON has a response do the code
     if (JSONAgentsTable.readyState == 4) {
 
+        //insert the JSON data on the variable
         agenttable = JSON.parse(this.responseText);
 
+        //empty the table to avoid duplicates
         document.getElementById("agent").innerHTML = "";
 
+        //based on the length of the variable with the JSON data iterate
         for(var i=1;i<agenttable.length+1;i++){
 
+            //this if only is used to change the color of every two lines
             if(tablecolor==true) {
 
+                //Insert the data of this iteration in the table
                 document.getElementById("agent").innerHTML +="<tr>" +
                     "<td id='departments'>" + agenttable[0][i-1] + "</td>" +
                     "<td>" + agenttable[i][0] + "</td>" +
@@ -210,6 +232,7 @@ function getAgentTable() {
                 tablecolor=false;
             }else{
 
+                //Insert the data of this iteration in the table
                 document.getElementById("agent").innerHTML +="<tr bgcolor='#DDDDDD'>" +
                     "<td id='departments'>" + agenttable[0][i-1] + "</td>" +
                     "<td>" + agenttable[i][0] + "</td>" +
@@ -227,16 +250,22 @@ function getTopicTable() {
 
     var topictable = "";
 
+    //if the JSON has a response do the code
     if (JSONTopicsTable.readyState == 4) {
 
+        //insert the JSON data on the variable
         topictable = JSON.parse(this.responseText);
 
+        //empty the table to avoid duplicates
         document.getElementById("topic").innerHTML = "";
 
+        //based on the length of the variable with the JSON data iterate
         for(var i=1;i<topictable.length+1;i++){
 
+            //this if only is used to change the color of every two lines
             if(tablecolor==true) {
 
+                //Insert the data of this iteration in the table
                 document.getElementById("topic").innerHTML +="<tr>" +
                 "<td id='departments'>" + topictable[0][i-1] + "</td>" +
                 "<td>" + topictable[i][0] + "</td>" +
@@ -247,6 +276,7 @@ function getTopicTable() {
                 tablecolor=false;
             }else{
 
+                //Insert the data of this iteration in the table
                 document.getElementById("topic").innerHTML +="<tr bgcolor='#DDDDDD'>" +
                     "<td id='departments'>" + topictable[0][i-1] + "</td>" +
                     "<td>" + topictable[i][0] + "</td>" +

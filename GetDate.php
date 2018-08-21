@@ -3,6 +3,9 @@
 
 include "Connection.php";
 
+//this session value reset the time to autologout
+$_SESSION['LAST_ACTIVITY'] = time();
+
 //initialize the variables
 $jsonData= [""];
 $From= '';
@@ -316,9 +319,9 @@ while ($row = mysqli_fetch_row($result)) {
 
     }
 
+    //Queries for the tickets count, the query is automatically choose based on what we choose on the filter
     if($FilterDept=="AutoDept" && $FilterLocation=="AutoLocation" && $FilterAgents=="AutoAgents" && $FilterTopics=="AutoTopics") {
 
-        //Queries for the tickets count
         $sql = "SELECT 
               (SELECT count(created) FROM ost_ticket WHERE (created BETWEEN '$From' AND '$To2') AND status_id IN (1,6)) as open, 
               (SELECT count(created) FROM ost_ticket WHERE (created BETWEEN '$From' AND '$To2') AND status_id IN (2,3,4,5)) as closed";
@@ -367,8 +370,11 @@ while ($row = mysqli_fetch_row($result)) {
     }
 }
 
-
-
+/*
+ *
+ * The next 2 elseif blocks generate new days/months/years if there is no data about them
+ *
+ */
 $toYear = substr($To,0,-6);
 $toMonth[0] = substr($To,0,-6);
 $toMonth[1] = substr($To,5,-3);

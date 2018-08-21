@@ -1,4 +1,5 @@
 function sortTable(n, tableid) {
+
     var table = 0;
     var rows = 0;
     var switching = 0;
@@ -61,6 +62,8 @@ function sortTable(n, tableid) {
             }
         }
     }
+
+    //this iteratio change the color of the rows to prevent them to move
     for(i=1;i<rows.length;i++){
 
         if(tablecolor==true){
