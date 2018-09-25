@@ -117,6 +117,7 @@ function handleReplyTotal() {
 function getLocationTable() {
 
     var locationtable = "";
+    tablecolor=true;
 
     //if the JSON has a response do the code
     if (JSONLocationsTable.readyState == 4) {
@@ -161,6 +162,7 @@ function getLocationTable() {
 function getDeptTable() {
 
     var deptable = "";
+    tablecolor=true;
 
     //if the JSON has a response do the code
     if (JSONDeptTable.readyState == 4) {
@@ -204,6 +206,7 @@ function getDeptTable() {
 
 function getAgentTable() {
 
+    tablecolor=true;
     var agenttable = "";
 
     //if the JSON has a response do the code
@@ -248,6 +251,7 @@ function getAgentTable() {
 
 function getTopicTable() {
 
+    tablecolor=true;
     var topictable = "";
 
     //if the JSON has a response do the code

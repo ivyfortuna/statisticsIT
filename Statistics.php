@@ -1,29 +1,10 @@
-<?php
 
-session_start();
-
-//after 1 hour of inactivity it will log out automatically
-if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 3600)) {
-
-    session_destroy();
-    session_unset();
-
-}
-$_SESSION['LAST_ACTIVITY'] = time(); // update last activity time
-
-?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-<?php
 
-//If the value is empty, it's because you hadn't log in, so redirect to login
-	if(!isset($_SESSION['login_user'])){ //if login in session is not set
-		header("Location: index.html");
-	}
-?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>statistics</title>

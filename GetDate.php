@@ -3,9 +3,6 @@
 
 include "Connection.php";
 
-//this session value reset the time to autologout
-$_SESSION['LAST_ACTIVITY'] = time();
-
 //initialize the variables
 $jsonData= [""];
 $From= '';

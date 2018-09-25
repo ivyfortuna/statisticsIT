@@ -1,5 +1,6 @@
 function sortTable(n, tableid) {
 
+    tablecolor=true;
     var table = 0;
     var rows = 0;
     var switching = 0;
@@ -9,6 +10,7 @@ function sortTable(n, tableid) {
     var shouldSwitch = 0;
     var dir = 0;
     var switchcount = 0;
+
 
     table = document.getElementById(tableid);
     switching = true;
